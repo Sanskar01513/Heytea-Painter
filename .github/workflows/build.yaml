@@ -13,11 +13,9 @@ jobs:
       - name: Install Conda
         uses: conda-incubator/setup-miniconda@v3
         with:
-          auto-activate: true
-      - name: Setting up Conda environment
-        run: |
-          conda env create -f environment.yml
-          conda activate heytea_env
+          auto-activate: false
+          environment-file: environment.yml
+          activate-environment: heytea_env
       - name: Install pyinstaller to pack application. 
         run: | 
           conda install pyinstaller -y
