@@ -199,15 +199,15 @@ class ModernDrawingApp:
         
         ctk.CTkLabel(optimize_frame, text="通用优化", font=(FONT_FAMILY, 14, "bold")).pack(pady=10)
         
-        self.simplify_eps = self.create_modern_slider(optimize_frame, "线条简化度", 0.1, 5.0, 1.0, 0.1, tooltip="简化线条路径，减少点数")
-        self.preview_thick = self.create_modern_slider(optimize_frame, "预览线条粗细", 1, 20, 1, 1, tooltip="预览图中线条的粗细")
-        self.spline_smooth = self.create_modern_slider(optimize_frame, "路径平滑度", 0, 5000, 0, 1, tooltip="使用B样条平滑路径")
-        self.jitter_correct = self.create_modern_slider(optimize_frame, "抖动修正强度", 0, 10, 0, 1, tooltip="修正线条抖动，使线条更平滑")
+        self.simplify_eps = self.create_modern_slider(optimize_frame, "线条简化度 [全局]", 0.1, 5.0, 1.0, 0.1, tooltip="简化线条路径，减少点数")
+        self.preview_thick = self.create_modern_slider(optimize_frame, "预览线条粗细 [预览]", 1, 20, 1, 1, tooltip="预览图中线条的粗细")
+        self.spline_smooth = self.create_modern_slider(optimize_frame, "路径平滑度 [全局]", 0, 5000, 0, 1, tooltip="使用B样条平滑路径")
+        self.jitter_correct = self.create_modern_slider(optimize_frame, "抖动修正强度 [全局]", 0, 10, 0, 1, tooltip="修正线条抖动，使线条更平滑")
         
-        self.thin_contours = ctk.CTkCheckBox(optimize_frame, text="边缘细化（双线变单线）", command=self.update_preview, font=(FONT_FAMILY, 11))
+        self.thin_contours = ctk.CTkCheckBox(optimize_frame, text="边缘细化（双线变单线）[全局]", command=self.update_preview, font=(FONT_FAMILY, 11))
         self.thin_contours.pack(pady=5)
         
-        self.skip_points = self.create_modern_slider(optimize_frame, "跳点加速", 1, 5, 1, 1, tooltip="跳过部分点来加快绘画速度")
+        self.skip_points = self.create_modern_slider(optimize_frame, "跳点加速 [全局]", 1, 5, 1, 1, tooltip="跳过部分点来加快绘画速度")
         
         # 4. 绘画模拟
         draw_frame = ctk.CTkFrame(self.control_panel, corner_radius=10)
@@ -221,19 +221,20 @@ class ModernDrawingApp:
         self.draw_method.set("短行程")
         self.draw_method.pack(fill="x", padx=20, pady=5)
         
-        self.stroke_len = self.create_modern_slider(draw_frame, "笔画长度", 5, 100, 15, 5, tooltip="每次绘制的点数（短行程模式）")
-        self.min_drag = self.create_modern_slider(draw_frame, "最小拖动距离", 1, 20, 5, 1, tooltip="触发移动的最小距离（智能拖动）")
-        self.draw_delay = self.create_modern_slider(draw_frame, "绘画延迟(ms)", 1, 100, 5, 1, tooltip="每个点之间的延迟时间")
-        self.lift_pause = self.create_modern_slider(draw_frame, "换线停顿", 3, 15, 5, 1, tooltip="换线时的停顿时间")
-        self.hand_shake = self.create_modern_slider(draw_frame, "手部抖动", 0, 5, 1, 1, tooltip="模拟手部抖动（仿真人）")
-        self.think_pause = self.create_modern_slider(draw_frame, "思考停顿倍率", 1, 10, 3, 1, tooltip="转角处的思考停顿（仿真人）")
+        self.stroke_len = self.create_modern_slider(draw_frame, "笔画长度 [方法1]", 5, 100, 15, 5, tooltip="每次绘制的点数（短行程模式）")
+        self.min_drag = self.create_modern_slider(draw_frame, "最小拖动距离 [方法2]", 1, 20, 5, 1, tooltip="触发移动的最小距离（智能拖动）")
+        self.draw_delay = self.create_modern_slider(draw_frame, "绘画延迟(ms) [全局]", 1, 100, 5, 1, tooltip="每个点之间的延迟时间")
+        self.lift_pause = self.create_modern_slider(draw_frame, "换线停顿 [方法1/2]", 3, 15, 5, 1, tooltip="换线时的停顿时间")
+        self.hand_shake = self.create_modern_slider(draw_frame, "手部抖动 [方法3]", 0, 5, 1, 1, tooltip="模拟手部抖动（仿真人）")
+        self.think_pause = self.create_modern_slider(draw_frame, "思考停顿倍率 [方法3]", 1, 10, 3, 1, tooltip="转角处的思考停顿（仿真人）")
+        self.corner_sharp = self.create_modern_slider(draw_frame, "转角锐利度 [方法3]", 0, 10, 5, 1, tooltip="转角锐利度：0=圆润平滑，10=极度锐利")
         
         # 5. 速度控制
         speed_frame = ctk.CTkFrame(self.control_panel, corner_radius=10)
         speed_frame.pack(fill="x", pady=10)
         
         ctk.CTkLabel(speed_frame, text="速度控制", font=(FONT_FAMILY, 14, "bold")).pack(pady=10)
-        self.speed_mult = self.create_modern_slider(speed_frame, "速度倍率", 0.1, 5.0, 1.0, 0.1, tooltip="全局速度调节，影响所有延迟")
+        self.speed_mult = self.create_modern_slider(speed_frame, "速度倍率 [全局]", 0.1, 5.0, 1.0, 0.1, tooltip="影响所有延迟参数的倍率")
         
         # 6. 功能按钮
         button_frame = ctk.CTkFrame(self.control_panel, fg_color="transparent")
@@ -350,6 +351,33 @@ class ModernDrawingApp:
             else:
                 display_path = file_path
             self.log(f"已加载图片: {display_path}")
+            
+            # 检查原始尺寸并给出提示
+            try:
+                with open(file_path, 'rb') as f:
+                    img_array = np.frombuffer(f.read(), np.uint8)
+                test_img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                
+                if test_img is not None:
+                    h, w = test_img.shape[:2]
+                    self.log(f"原始尺寸: {w}x{h} 像素")
+                    
+                    # 警告信息
+                    if max(h, w) > 4096:
+                        self.log("⚠️ 图片超大，已预缩放到 4096px")
+                        self.log("   绘画时将根据画布大小进一步调整")
+                    elif max(h, w) < 256:
+                        self.log("⚠️ 图片极小，已预放大")
+                    else:
+                        self.log("   提示: 绘画时将根据画布大小自动调整")
+                    
+                    # 计算总像素
+                    total_pixels = w * h
+                    if total_pixels > 10000000:  # 超过 10MP
+                        self.log(f"   总像素: {total_pixels/1000000:.1f}MP")
+            except Exception as e:
+                self.log(f"   无法读取图片信息: {e}")
+            
             self.update_preview()
             self.start_btn.configure(state="normal")
     
@@ -433,6 +461,13 @@ class ModernDrawingApp:
         self.img_w = img_w
         self.img_h = img_h
         
+        # 释放旧的图像对象，避免内存泄漏
+        if self.preview_original_img is not None:
+            try:
+                self.preview_original_img.close()
+            except:
+                pass
+        
         img_rgb = cv2.cvtColor(preview_img, cv2.COLOR_BGR2RGB)
         self.preview_original_img = Image.fromarray(img_rgb)
         self.preview_zoom = 1.0
@@ -510,12 +545,53 @@ class ModernDrawingApp:
             self.log("错误: 没有可绘制的轮廓")
             return
         
-        self.root.iconify()
-        self.log("GUI已最小化，3秒后开始绘画...")
-        import time
-        time.sleep(3)
+        # 检查轮廓点数
+        total_points = 0
+        for contour in self.contours:
+            points = contour.squeeze()
+            if len(points.shape) > 1:
+                total_points += len(points)
         
+        self.log(f"绘画数据: {len(self.contours)} 条路径, {total_points} 个点")
+        
+        # 警告
+        if total_points > 50000:
+            self.log("⚠️ 点数过多！建议调整参数：")
+            self.log("   1. 增加【线条简化度】到 2-3")
+            self.log("   2. 启用【跳点加速】到 2-3")
+            self.log("   3. 减小【预览线条粗细】")
+        
+        # 禁用按钮
         self.start_btn.configure(state="disabled")
+        
+        # 最小化 GUI
+        self.root.iconify()
+        self.log("GUI已最小化...")
+        
+        # 确保终端窗口获得焦点
+        import ctypes
+        import time
+        try:
+            # 获取控制台窗口句柄
+            kernel32 = ctypes.windll.kernel32
+            user32 = ctypes.windll.user32
+            
+            # 获取当前进程的控制台窗口
+            console_hwnd = kernel32.GetConsoleWindow()
+            
+            if console_hwnd:
+                # 显示并激活控制台窗口
+                user32.ShowWindow(console_hwnd, 9)  # SW_RESTORE = 9
+                user32.SetForegroundWindow(console_hwnd)
+                self.log("已激活终端窗口")
+            else:
+                self.log("提示: 请手动切换到终端窗口查看绘画进度")
+        except Exception as e:
+            self.log(f"无法激活终端窗口: {e}")
+            self.log("提示: 请手动切换到终端窗口查看绘画进度")
+        
+        time.sleep(2)
+        
         method = self.draw_method.get()
         speed = self.speed_mult.get()
         
@@ -540,6 +616,7 @@ class ModernDrawingApp:
                    self.lift_pause.get() / 100.0 / speed,
                    int(self.hand_shake.get()),
                    self.think_pause.get(),
+                   int(self.corner_sharp.get()),
                    speed)
             threading.Thread(target=start_drawing_method_3, args=args, daemon=True).start()
     
@@ -587,6 +664,7 @@ class ModernDrawingApp:
             "skip_points": self.skip_points.get(),
             "hand_shake": self.hand_shake.get(),
             "think_pause": self.think_pause.get(),
+            "corner_sharpness": self.corner_sharp.get(),
             "lift_pause": self.lift_pause.get(),
             "speed_multiplier": self.speed_mult.get()
         }
@@ -639,6 +717,7 @@ class ModernDrawingApp:
         self.skip_points.set(values.get("skip_points", 1))
         self.hand_shake.set(values.get("hand_shake", 1))
         self.think_pause.set(values.get("think_pause", 3))
+        self.corner_sharp.set(values.get("corner_sharpness", 5))
         self.lift_pause.set(values.get("lift_pause", 5))
         self.speed_mult.set(values.get("speed_multiplier", 1.0))
     
