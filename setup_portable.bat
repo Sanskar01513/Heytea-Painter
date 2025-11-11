@@ -5,51 +5,51 @@ title Heytea Painter - Portable Setup
 cd /d "%~dp0"
 
 echo ========================================
-echo Heytea Painter - ±ãĞ¯Ê½»·¾³°²×°
+echo Heytea Painter - ä¾¿æºå¼ç¯å¢ƒå®‰è£…
 echo ========================================
 echo.
 
-REM Check if venv exists
-if exist "venv\" (
-    echo [INFO] ĞéÄâ»·¾³ÒÑ´æÔÚ: venv/
-    echo [INFO] Ìø¹ı°²×°...
+REM Check if env exists
+if exist "env\" (
+    echo [INFO] è™šæ‹Ÿç¯å¢ƒå·²å­˜åœ¨: env/
+    echo [INFO] è·³è¿‡å®‰è£…...
     goto :complete
 )
 
-echo [²½Öè 1/3] ¼ì²é Python °²×°...
+echo [æ­¥éª¤ 1/3] æ£€æŸ¥ Python å®‰è£…...
 python --version >nul 2>&1
 if errorlevel 1 (
-    echo [ERROR] Î´ÕÒµ½ Python£¡
+    echo [ERROR] æœªæ‰¾åˆ° Pythonï¼
     echo.
-    echo ÇëÏÈ°²×° Python 3.10 »ò¸ü¸ß°æ±¾
-    echo ÏÂÔØµØÖ·: https://www.python.org/downloads/
+    echo è¯·å…ˆå®‰è£… Python 3.10 æˆ–æ›´é«˜ç‰ˆæœ¬
+    echo ä¸‹è½½åœ°å€: https://www.python.org/downloads/
     echo.
-    echo °²×°Ê±Çë¹´Ñ¡ "Add Python to PATH"
+    echo å®‰è£…æ—¶è¯·å‹¾é€‰ "Add Python to PATH"
     pause
     exit /b 1
 )
 
 for /f "tokens=2" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
-echo [INFO] ÕÒµ½ Python %PYTHON_VERSION%
+echo [INFO] æ‰¾åˆ° Python %PYTHON_VERSION%
 echo.
 
-echo [²½Öè 2/3] ´´½¨ĞéÄâ»·¾³...
-python -m venv venv
+echo [æ­¥éª¤ 2/3] åˆ›å»ºè™šæ‹Ÿç¯å¢ƒ...
+python -m env env
 
 if errorlevel 1 (
-    echo [ERROR] ´´½¨ĞéÄâ»·¾³Ê§°Ü£¡
+    echo [ERROR] åˆ›å»ºè™šæ‹Ÿç¯å¢ƒå¤±è´¥ï¼
     pause
     exit /b 1
 )
 
-echo [INFO] ĞéÄâ»·¾³´´½¨³É¹¦
+echo [INFO] è™šæ‹Ÿç¯å¢ƒåˆ›å»ºæˆåŠŸ
 echo.
 
-echo [²½Öè 3/3] °²×°ÒÀÀµ°ü...
-echo Õâ¿ÉÄÜĞèÒª 5-10 ·ÖÖÓ£¬ÇëÄÍĞÄµÈ´ı...
+echo [æ­¥éª¤ 3/3] å®‰è£…ä¾èµ–åŒ…...
+echo è¿™å¯èƒ½éœ€è¦ 5-10 åˆ†é’Ÿï¼Œè¯·è€å¿ƒç­‰å¾…...
 echo.
 
-call venv\Scripts\activate.bat
+call env\Scripts\activate.bat
 
 REM Upgrade pip
 python -m pip install --upgrade pip
@@ -66,7 +66,7 @@ pip install screeninfo==0.8.1
 
 if errorlevel 1 (
     echo.
-    echo [ERROR] °²×°ÒÀÀµ°üÊ§°Ü£¡
+    echo [ERROR] å®‰è£…ä¾èµ–åŒ…å¤±è´¥ï¼
     pause
     exit /b 1
 )
@@ -76,11 +76,10 @@ deactivate
 :complete
 echo.
 echo ========================================
-echo °²×°Íê³É£¡
+echo å®‰è£…å®Œæˆï¼
 echo ========================================
 echo.
-echo ĞéÄâ»·¾³Î»ÖÃ: %~dp0venv
+echo è™šæ‹Ÿç¯å¢ƒä½ç½®: %~dp0env
 echo.
-echo ÏÖÔÚ¿ÉÒÔÔËĞĞ: start_portable.bat
 echo.
 pause
