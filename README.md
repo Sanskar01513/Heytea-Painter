@@ -1,5 +1,6 @@
 # Heytea-Painter
 Automatically add drawing elements by extracting edges.  
+  ****
 一键启动包v1（建议）：  
 https://pan.quark.cn/s/b90824f581b1  
 一键启动包v2(最新测试中)：  
