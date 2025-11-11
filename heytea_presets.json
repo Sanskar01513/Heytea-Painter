@@ -9,7 +9,7 @@
     "simplify_epsilon": 1.3,
     "preview_thickness": 2.0,
     "spline_smoothness": 0.0,
-    "jitter_correction": 5.0,
+    "jitter_correction": 0.0,
     "stroke_len": 19.702380952380953,
     "min_drag_dist": 5.0,
     "draw_delay": 1.0,
